@@ -1,0 +1,12 @@
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: bda
+      POSTGRES_PASSWORD: bdabda
+      POSTGRES_DB: gestion_etudiant
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d

@@ -1,0 +1,9 @@
+{
+  "name": "bda-backend",
+  "version-string": "0.1.0",
+  "dependencies": [
+    "crow",
+    "libpqxx",
+    "asio"
+  ]
+}

@@ -1,0 +1,27 @@
+# Compilation et binaires
+build/
+bin/
+lib/
+*.o
+*.a
+*.so
+*.exe
+*.out
+
+# Gestionnaire de paquets vcpkg
+vcpkg/
+vcpkg_installed/
+vcpkg.user.json
+
+# IDE (VS Code, CLion, etc.)
+.vscode/
+.idea/
+*.swp
+*.user
+
+# Docker (Données locales si tu montes un volume de données)
+pgdata/
+
+# OS
+.DS_Store
+Thumbs.db
