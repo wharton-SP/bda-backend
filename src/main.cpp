@@ -1,3 +1,5 @@
+#include "routes/AuthRoutes.hpp"
+
 #include "crow.h"
 #include <pqxx/pqxx>
 #include <iostream>
@@ -16,6 +18,8 @@ int main () {
     int port = 1890;
     crow::SimpleApp app;
     app.loglevel(crow::LogLevel::Warning);
+
+    setup_auth_routes(app);
 
     CROW_ROUTE(app, "/health")([](){
         return "API is healthy!";

@@ -3,9 +3,22 @@ project(BDA_Backend)
 
 set(CMAKE_CXX_STANDARD 17)
 
+include_directories(include)
+
 find_package(libpqxx REQUIRED)
 find_package(Crow REQUIRED)
 
-add_executable(bda_api src/main.cpp)
+file(GLOB_RECURSE SOURCES 
+    "src/main.cpp"
+    "src/models/*.cpp"
+    "src/controllers/*.cpp"
+    "src/routes/*.cpp"
+)
 
-target_link_libraries(bda_api PRIVATE libpqxx::pqxx Crow::Crow)
+add_executable(bda_api ${SOURCES})
+
+target_link_libraries(bda_api PRIVATE 
+    libpqxx::pqxx 
+    Crow::Crow
+    pthread
+)
