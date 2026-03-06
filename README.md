@@ -2,7 +2,6 @@
 
 ## Project Structure
 
-```
 BDA/
 ├── sql/
 │   └── setup.sql
@@ -21,4 +20,3 @@ BDA/
 ├── .gitignore
 ├── README.md         
 └── CMakeLists.txt 
-```
