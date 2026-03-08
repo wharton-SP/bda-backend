@@ -20,5 +20,6 @@ add_executable(bda_api ${SOURCES})
 target_link_libraries(bda_api PRIVATE 
     libpqxx::pqxx 
     Crow::Crow
+    asio::asio
     pthread
 )
