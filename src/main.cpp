@@ -1,4 +1,5 @@
 #include "routes/AuthRoutes.hpp"
+#include "routes/SuscribeRoutes.hpp"
 
 #include "crow.h"
 #include <pqxx/pqxx>
@@ -20,6 +21,7 @@ int main () {
     app.loglevel(crow::LogLevel::Warning);
 
     setup_auth_routes(app);
+    setup_suscribe_routes(app);
 
     CROW_ROUTE(app, "/health")([](){
         return "API is healthy!";
