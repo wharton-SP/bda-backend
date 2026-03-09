@@ -3,6 +3,30 @@
 #include "models/SuscribeModel.hpp"
 
 namespace SuscribeController {
+
+    void handle_get_all(const crow::request& req, crow::response& res) {
+        auto subscriptions = SuscribeModel::getAll();
+
+        crow::json::wvalue json;
+        std::vector<crow::json::wvalue> items;
+
+        for (const auto& sub : subscriptions) {
+            crow::json::wvalue item;
+            item["matricule"] = sub.matricule;
+            item["nom"] = sub.nom;
+            item["droit_inscription"] = sub.droit_inscription;
+            items.push_back(std::move(item));
+        }
+
+        json["data"] = std::move(items);
+        json["count"] = subscriptions.size();
+
+        res.code = 200;
+        res.set_header("Content-Type", "application/json");
+        res.write(json.dump());
+        res.end();
+    }
+
     void handle_create(const crow::request& req, crow::response& res) {
         auto body = crow::json::load(req.body);
         if (!body) {
@@ -12,7 +36,7 @@ namespace SuscribeController {
             return;
         }
 
-        if (SuscribeModel::create(body["matricule"].i(), body["nom"].s(), body["droit_inscription"].i())) {
+        if (SuscribeModel::create(body["matricule"].i(), body["nom"].s(), body["droit_inscription"].i(), body["utilisateur"].s())) {
             res.code = 201;
             res.write("Suscribe Created !");
         }
@@ -32,7 +56,7 @@ namespace SuscribeController {
             return;
         }
 
-        if (SuscribeModel::update(body["matricule"].i(), body["nom"].s(), body["droit_inscription"].i())) {
+        if (SuscribeModel::update(body["matricule"].i(), body["nom"].s(), body["droit_inscription"].i(), body["utilisateur"].s())) {
             res.code = 200;
             res.write("Suscribe updated !");
         }
@@ -52,7 +76,7 @@ namespace SuscribeController {
             return;
         }
 
-        if (SuscribeModel::remove(body["matricule"].i())) {
+        if (SuscribeModel::remove(body["matricule"].i(), body["utilisateur"].s())) {
             res.code = 200;
             res.write("Suscribe deleted !");
         }

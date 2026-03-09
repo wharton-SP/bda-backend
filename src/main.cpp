@@ -1,5 +1,6 @@
 #include "routes/AuthRoutes.hpp"
 #include "routes/SuscribeRoutes.hpp"
+#include "routes/AuditRoutes.hpp"
 
 #include "crow.h"
 #include <pqxx/pqxx>
@@ -22,6 +23,7 @@ int main () {
 
     setup_auth_routes(app);
     setup_suscribe_routes(app);
+    setup_audit_routes(app);
 
     CROW_ROUTE(app, "/health")([](){
         return "API is healthy!";
